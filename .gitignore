@@ -42,3 +42,4 @@ AmazonQ.md
 # AWS CLI working files
 eks-service-role-trust-policy.json
 nodegroup-role-trust-policy.json
+secrets.yaml
