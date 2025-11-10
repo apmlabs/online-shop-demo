@@ -22,6 +22,7 @@ Repository URL: https://github.com/GoogleCloudPlatform/microservices-demo
 - Use AWS CLI and kubectl for cluster management
 - Dynatrace operator and OneAgent for full-stack monitoring
 - **CRITICAL**: Deploy Dynatrace operator BEFORE microservices for complete visibility
+- **DUAL DEPLOYMENT**: Can deploy alongside existing demos using namespace isolation
 
 ## Installation Process (UPDATED ORDER - Dynatrace FIRST)
 1. **IAM Roles**: Create EKS cluster role and node group role (check if exists first)
@@ -32,6 +33,30 @@ Repository URL: https://github.com/GoogleCloudPlatform/microservices-demo
 6. **Dynatrace Config**: Apply DynaKube secrets and configuration
 7. **Microservices**: Deploy online shop demo manifests
 8. **Verification**: Check pod status and service accessibility
+
+## Dual Deployment Process (Online Shop + Existing Demo)
+When deploying Online Shop Demo alongside existing demos:
+1. **Check existing cluster**: `aws eks list-clusters --region us-east-2`
+2. **Connect to cluster**: `aws eks update-kubeconfig --region us-east-2 --name CLUSTER_NAME`
+3. **Create namespace**: `kubectl create namespace online-shop`
+4. **Download manifests**: `curl -o online-shop-manifests.yaml https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/main/release/kubernetes-manifests.yaml`
+5. **Modify manifests**: Add namespace and rename frontend service to avoid conflicts
+6. **Deploy**: `kubectl apply -f online-shop-namespaced.yaml`
+7. **Verify**: Check pods and services in `online-shop` namespace
+
+### Manifest Modification Script
+```bash
+#!/bin/bash
+# Add namespace to all resources and rename frontend-external service
+sed -e '/^apiVersion:/i\
+---' \
+    -e '/^metadata:/a\
+  namespace: online-shop' \
+    -e 's/name: frontend-external/name: online-shop-frontend/' \
+    online-shop-manifests.yaml > online-shop-namespaced.yaml
+# Remove the first --- that was added before the first apiVersion
+sed -i '1d' online-shop-namespaced.yaml
+```
 
 ## Dynatrace Integration
 - **Operator**: Kubernetes operator for OneAgent management
