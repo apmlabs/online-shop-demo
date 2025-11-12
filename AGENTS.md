@@ -229,6 +229,8 @@ When cleaning up permanently, follow this order to avoid dependency issues:
 - **Don't assume existing infrastructure**: Always check AWS resources first
 - **Don't skip IAM role checks**: Roles may exist from previous deployments
 - **Don't use hardcoded resource IDs**: VPCs, subnets vary by account/region
+- **ALWAYS use demo-specific IAM role names**: Use `online-shop-eks-cluster-role` and `online-shop-eks-nodegroup-role` instead of generic names to avoid conflicts with other demos
+- **ALWAYS use demo-specific cluster names**: Use `online-shop-demo-mcp` for cluster and `online-shop-demo-mcp-nodes` for nodegroup to avoid conflicts with other demos
 - **Use correct Kubernetes version**: Match AMI type with K8s version compatibility
 - **Don't skip wait commands**: Use aws eks wait instead of sleep
 - **Don't forget Dynatrace first**: Install operator before microservices
