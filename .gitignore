@@ -37,7 +37,6 @@ __pycache__/
 *.pyc
 
 # Dynamic status files
-AmazonQ.md
 
 # AWS CLI working files
 eks-service-role-trust-policy.json
