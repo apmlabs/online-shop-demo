@@ -320,3 +320,8 @@ Always scale down or delete resources to stop shopping expenses immediately! �
 **📚 Architecture**: Cloud-native microservices e-commerce platform  
 **🎯 Use Case**: Complete online shopping application for Kubernetes demonstrations  
 **📊 Context**: See [AmazonQ.md](./AmazonQ.md) for current deployment status
+
+
+## Codex development
+
+Start Codex in this directory. [AGENTS.md](AGENTS.md) defines the project role; [PROGRESS.md](PROGRESS.md) is the current handover and work log; [.codex/knowledge/INDEX.md](.codex/knowledge/INDEX.md) indexes detailed inherited knowledge. Original history and Kiro skills remain preserved.

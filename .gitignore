@@ -42,3 +42,14 @@ __pycache__/
 eks-service-role-trust-policy.json
 nodegroup-role-trust-policy.json
 secrets.yaml
+
+# Codex adoption: preserve private migration sources locally
+.codex/legacy/
+.codex/migration-manifest.json
+.agents/skills/**/.env
+.agents/skills/**/activation.json
+.agents/skills/**/.*state*.json
+
+# Private MCP credentials and local migration evidence
+.codex/private/
+.codex/validation.json
